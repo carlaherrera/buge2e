@@ -61,7 +61,7 @@ export default function Home() {
               id="email"
               data-testid="email-input"
               placeholder="Digite seu e-mail"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

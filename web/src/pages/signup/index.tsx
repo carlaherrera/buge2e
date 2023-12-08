@@ -62,7 +62,7 @@ export default function SignUp() {
               id="seu-email"
               data-testid="input-email"
               placeholder="Digite seu e-mail"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
