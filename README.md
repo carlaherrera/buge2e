@@ -12,6 +12,8 @@ A aplicação, vai ser disponibilizada como uma plataforma **web** para perfil u
 
 O sistema tem o objetivo de aprimorar a maneira como as lanchonetes/ restaurantes lidam com comandas, pedidos e administração de cardápio.
 
+- [**Figma**](https://www.figma.com/file/kQqNFLJa2zCHYjPaA7CzdH/Projeto-Buge2e?type=design&node-id=0%3A1&mode=design&t=Yr2cooriN1Of1nTN-1) - Protótipo
+
 
 ## Instruções:
 Na pasta de cada projeto, você  encontrará as informações necessárias para realizar um fork/clone  do projeto e subir a aplicação  no seu ambiente local na sua máquina. 
