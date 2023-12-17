@@ -7,16 +7,6 @@ interface CategoryRequest {
 class RemoveCategoryService {
     async execute({ category_id }: CategoryRequest) {
         try {
-            const existingCategory = await prismaClient.category.findUnique({
-                where: {
-                    id: category_id,
-                },
-            });
-
-            if (!existingCategory) {
-                throw new Error(`Categoria com o ID ${category_id} não encontrada`);
-            }
-
             const removedCategory = await prismaClient.category.delete({
                 where: {
                     id: category_id,
@@ -25,11 +15,13 @@ class RemoveCategoryService {
 
             return removedCategory;
         } catch (error) {
-            throw new Error(`Erro ao remover categoria: ${error.message}`);
+            if (error.code === 'P2025') { // Código de erro específico do Prisma para "registro não encontrado"
+                throw new Error(`Categoria com o ID ${category_id} não encontrada`);
+            } else {
+                throw new Error(`Erro ao remover categoria: ${error.message}`);
+            }
         }
     }
 }
 
 export { RemoveCategoryService };
-
-

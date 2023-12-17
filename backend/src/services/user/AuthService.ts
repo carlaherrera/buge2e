@@ -1,5 +1,5 @@
 import prismaClient from "../../prisma";
-import { compare } from "bcryptjs"; 'bcryptjs';
+import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 
 interface AuthRequest {
@@ -9,46 +9,43 @@ interface AuthRequest {
 
 class AuthUserService {
     async execute({ email, password }: AuthRequest) {
-        //Verificar se o e-mail está cadastrado
+        if (!email || !password) {
+            throw new Error('E-mail e senha são obrigatórios.');
+        }
+
         const user = await prismaClient.user.findFirst({
             where: {
                 email: email
             }
-        })
+        });
 
-        if (!user) {
-            throw new Error('Usuário e/ou Senha incorreto!')
+        if (!user || !(await compare(password, user.password))) {
+            throw new Error('Usuário e/ou Senha incorretos.');
         }
 
-        //verificar se a senha está correta:
-        const passwordMatch = await compare(password, user.password)
-
-        if (!passwordMatch) {
-            throw new Error('Usuário e/ou Senha incorreto!')
+        let token;
+        try {
+            token = sign(
+                {
+                    name: user.name,
+                    email: user.email,
+                },
+                process.env.JWT_SECRET,
+                {
+                    subject: user.id,
+                    expiresIn: '3d' 
+                }
+            );
+        } catch (error) {
+            throw new Error('Erro ao gerar token.');
         }
-
-        //gerar token JWT (Json Web Token)
-        const token = sign(
-            {
-                name: user.name,
-                email: user.email,
-
-            },
-            process.env.JWT_SECRET,
-            {
-                subject: user.id,
-                expiresIn: '300d'
-            }
-        )
-
 
         return {
             id: user.id,
             name: user.name,
             email: user.email,
             token: token
-        }
-
+        };
     }
 }
 

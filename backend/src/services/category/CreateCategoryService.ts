@@ -6,19 +6,18 @@ interface CategoryRequest {
 
 class CreateCategoryService {
     async execute({ name }: CategoryRequest) {
+        if (!name || name.trim() === '') {
+            throw new Error('Informe um nome válido para a categoria.');
+        }
 
         const categoryAlreadyExists = await prismaClient.category.findFirst({
             where: {
-                name: name
-            }
-        })
+                name: name,
+            },
+        });
 
         if (categoryAlreadyExists) {
             throw new Error('Categoria já cadastrada!');
-        }
-
-        if (name.trim() === '') {
-            throw new Error('Nome inválido!');
         }
 
         const category = await prismaClient.category.create({
@@ -28,12 +27,11 @@ class CreateCategoryService {
             select: {
                 id: true,
                 name: true,
-            }
-        })
-
+            },
+        });
 
         return category;
     }
 }
 
-export { CreateCategoryService }
+export { CreateCategoryService };

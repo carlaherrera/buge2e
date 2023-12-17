@@ -39,8 +39,8 @@ router.delete('/user/remove', isAuthenticated, new RemoveUserController().handle
 
 //-- ROTAS CATEGORY --
 router.post('/category', isAuthenticated, new CreateCategoryController().handle)
-router.get('/category', isAuthenticated, new ListCategoryController().handle)
-router.delete('/category', isAuthenticated, new RemoveCategoryController().handle)
+router.get('/category/list', isAuthenticated, new ListCategoryController().handle)
+router.delete('/category/remove', isAuthenticated, new RemoveCategoryController().handle)
 
 // -- ROTAS PRODUCT --
 router.post('/product', isAuthenticated, upload.single('file'), new CreateProductController().handle)

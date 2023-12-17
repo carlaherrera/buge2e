@@ -1,66 +1,52 @@
 import prismaClient from "../../prisma";
-import { hash } from 'bcryptjs'
+import { hash } from 'bcryptjs';
 
 interface UserRequest {
     name: string;
     email: string;
-    password: string
+    password: string;
 }
-
 
 class CreateUserService {
     async execute({ name, email, password }: UserRequest) {
-
-        //verifica se email enviado
-        if (!email) {
-            throw new Error('Email incorreto')
+        if (!name) {
+            throw new Error('Nome é obrigatório');
         }
 
-        //formato de e-mail incorreto sem @
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            throw new Error('Formato de e-mail incorreto');
+        const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !EMAIL_REGEX.test(email)) {
+            throw new Error('Formato de e-mail inválido');
         }
 
-        // Verificar a senha com os critérios especificados
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
-        if (!passwordRegex.test(password)) {
-            throw new Error('A senha deve conter entre 8 e 12 caracteres, pelo menos uma letra maiúscula, um número, uma letra minúscula e um caractere especial.');
+        const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$/;
+        if (!password || !PASSWORD_REGEX.test(password)) {
+            throw new Error('Senha inválida. A senha deve conter entre 8 e 12 caracteres, incluindo pelo menos uma letra maiúscula, um número e um caractere especial.');
         }
 
-
-        //Verificar se esse e-mail já está cadastrado na plataforma
         const userAlreadyExists = await prismaClient.user.findFirst({
-            where: {
-                email: email
-            }
-        })
+            where: { email }
+        });
 
         if (userAlreadyExists) {
-            throw new Error('E-mail já cadastrado!')
+            throw new Error('E-mail já cadastrado');
         }
 
-        //criptografar a senha 
-        const passwordHash = await hash(password, 8)
-
-        //cadastrar o usuário
+        const passwordHash = await hash(password, 10); 
         const user = await prismaClient.user.create({
             data: {
-                name: name,
-                email: email,
-                password: passwordHash, //a senha criptografada vai ser salva no bd
+                name,
+                email,
+                password: passwordHash,
             },
-
             select: {
                 id: true,
                 name: true,
                 email: true
-
             }
-        })
+        });
 
         return user;
     }
 }
 
-export { CreateUserService }
+export { CreateUserService };

@@ -7,28 +7,23 @@ interface RemoveUserRequest {
 class RemoveUserService {
     async execute({ user_id }: RemoveUserRequest) {
         try {
-            const user = await prismaClient.user.delete({
+            await prismaClient.user.delete({
                 where: {
                     id: user_id,
-                },
-
-                select: {
-                    id: true,
-                    name: true,
-                    email: true
-
-                },
-                
+                }
             });
 
-           
-            return user;
+            return { message: "Usuário excluído com sucesso." };
         } catch (error) {
-            console.error("Erro ao excluir o usuário:", error);
-            throw new Error("Não foi possível excluir o usuário.");
+            if (error.code === 'P2025') { // Código de erro do Prisma para "registro não encontrado"
+                throw new Error("Usuário não encontrado.");
+            } else {
+                // Aqui, considere usar um sistema de log mais robusto
+                console.error("Erro ao excluir o usuário:", error);
+                throw new Error("Erro ao excluir o usuário.");
+            }
         }
     }
 }
 
 export { RemoveUserService };
-
