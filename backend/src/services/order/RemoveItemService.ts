@@ -6,15 +6,29 @@ interface ItemRequest {
 
 class RemoveItemService {
     async execute({ item_id }: ItemRequest) {
+        if (!item_id) {
+            throw new Error("ID do item é necessário.");
+        }
+
         try {
-            const order = await prismaClient.item.delete({
-                where: {
-                    id: item_id,
-                },
+            // Verifica se o item existe
+            const existingItem = await prismaClient.item.findUnique({
+                where: { id: item_id },
             });
+
+            if (!existingItem) {
+                throw new Error("Item não encontrado.");
+            }
+
+            const order = await prismaClient.item.delete({
+                where: { id: item_id },
+            });
+
             return order;
         } catch (error) {
             console.error("Erro ao remover o item:", error);
+
+            // Pode-se adicionar lógica adicional para tratar diferentes tipos de erro
             throw new Error("Não foi possível remover o item.");
         }
     }

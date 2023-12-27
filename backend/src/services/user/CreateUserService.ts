@@ -10,7 +10,7 @@ interface UserRequest {
 class CreateUserService {
     async execute({ name, email, password }: UserRequest) {
         if (!name) {
-            throw new Error('Nome é obrigatório');
+            throw new Error('Nome, e-mail e senha são obrigatórios.');
         }
 
         const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

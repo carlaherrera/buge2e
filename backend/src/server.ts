@@ -15,7 +15,8 @@ app.use(cors());
 
 app.use(router);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use('/api-swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+
 
 app.use(
     '/files',

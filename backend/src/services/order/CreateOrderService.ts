@@ -10,7 +10,7 @@ class CreateOrderService {
         try {
             // Verifique se o número da mesa é um número válido e maior que zero
             if (typeof table !== 'number' || isNaN(table) || table <= 0) {
-                throw new Error('Número da mesa inválido. Deve ser um número positivo.');
+                throw new Error('Número da mesa inválido');
             }
 
             // Verifique se o nome é uma string válida (opcional)
@@ -34,14 +34,14 @@ class CreateOrderService {
             if (error instanceof Error) {
                 // Verifique o tipo de erro e formate a mensagem de erro apropriadamente
                 if (error.message.includes('Número da mesa inválido')) {
-                    throw new Error('Número da mesa inválido. Deve ser um número positivo.');
+                    throw new Error('Número da mesa inválido');
                 } else if (error.message.includes('Nome inválido')) {
                     throw new Error('Nome inválido');
                 } else {
                     throw new Error('Erro ao criar o pedido');
                 }
             } else {
-                throw new Error('Erro desconhecido ao criar o pedido');
+                throw new Error('Internal server error');
             }
         }
     }

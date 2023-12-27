@@ -6,19 +6,34 @@ interface OrderRequest {
 
 class SendOrderService {
     async execute({ order_id }: OrderRequest) {
+        if (!order_id) {
+            throw new Error("ID do pedido é necessário.");
+        }
 
-        const order = await prismaClient.order.update({
-            where: {
-                id: order_id
-            },
-            data: {
-                draft: false
+        try {
+            // Verifica se o pedido existe
+            const existingOrder = await prismaClient.order.findUnique({
+                where: { id: order_id },
+            });
+
+            if (!existingOrder) {
+                throw new Error("Pedido não encontrado.");
             }
-        })
-        return order
 
+            // Atualiza o status do pedido
+            const updatedOrder = await prismaClient.order.update({
+                where: { id: order_id },
+                data: { draft: false }
+            });
+
+            return updatedOrder;
+
+        } catch (error) {
+            console.error("Erro ao enviar o pedido:", error);
+            throw new Error("Não foi possível atualizar o status do pedido.");
+        }
     }
 }
 
-export { SendOrderService }
+export { SendOrderService };
 

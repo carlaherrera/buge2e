@@ -6,42 +6,27 @@ interface OrderRequest {
 
 class RemoveOrderService {
     async execute({ order_id }: OrderRequest) {
+        if (typeof order_id !== 'string' || order_id.trim() === '') {
+            throw new Error('ID do pedido inválido');
+        }
+
         try {
-            // Verificar se o order_id é uma string não vazia
-            if (typeof order_id !== 'string' || order_id.trim() === '') {
-                throw new Error('ID do pedido inválido');
-            }
-
-            // Tentar excluir o pedido
             const deletedOrder = await prismaClient.order.delete({
-                where: {
-                    id: order_id,
-                },
+                where: { id: order_id },
             });
-
-            if (!deletedOrder) {
-                throw new Error('Pedido não encontrado');
-            }
 
             return deletedOrder;
         } catch (error) {
-            // Tratamento de erros
-            console.error(error);
+            console.error("Erro ao remover o pedido:", error);
 
-            if (error instanceof Error) {
-                // Verificar o tipo de erro e formate a mensagem de erro apropriadamente
-                if (error.message.includes('ID do pedido inválido')) {
-                    throw new Error('ID do pedido inválido');
-                } else if (error.message.includes('Pedido não encontrado')) {
-                    throw new Error('Pedido não encontrado');
-                } else {
-                    throw new Error('Erro ao remover o pedido');
-                }
-            } else {
-                throw new Error('Erro desconhecido ao remover o pedido');
+            if (error.code === "P2025") {
+                // Erro específico do Prisma para "Registro não encontrado"
+                throw new Error('Pedido não encontrado');
             }
+            throw new Error('Erro ao remover o pedido');
         }
     }
 }
 
 export { RemoveOrderService };
+
