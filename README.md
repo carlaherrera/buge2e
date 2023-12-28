@@ -8,7 +8,7 @@ Neste repositório, você encontrará a aplicação Backend e Frontend BUGE2E, u
 
 ### Buge2e - Comanda Digital para Lanchonetes e restaurantes
 
-A aplicação, vai ser disponibilizada como uma plataforma **web** para perfil usuários cozinha e gerenciamento de cardápio e **mobile** para acesso através do device físico do perfil usuário garçom.
+A aplicação, disponibilizada como uma plataforma **web** para perfil usuários cozinha e gerenciamento de cardápio e **mobile** para acesso através do device físico do perfil usuário garçom.
 
 O sistema tem o objetivo de aprimorar a maneira como as lanchonetes/ restaurantes lidam com comandas, pedidos e administração de cardápio.
 
@@ -19,9 +19,10 @@ O sistema tem o objetivo de aprimorar a maneira como as lanchonetes/ restaurante
 Na pasta de cada projeto, você  encontrará as informações necessárias para realizar um fork/clone  do projeto e subir a aplicação  no seu ambiente local na sua máquina. 
 Assim como as ferramentas/tecnologias e dependências necessárias para executar a aplicação.
 
-### Clone do projeto
-
-Para execução do projeto, cria uma pasta e faça  o clone através de um terminal de sua preferência e utilize o comando:
+### Fork do projeto
+- Realize o fork do projeto.
+- Para execução do projeto, crie uma pasta e faça o clone do projeto que ralizou o fork no seu github
+- Em um terminal de sua preferência e utilize o comando subistituindo a url conforme o projeto no seu github:
 
 `git clone https://github.com/repoe2e/buge2e.git`
 
@@ -31,4 +32,5 @@ Para execução do projeto, cria uma pasta e faça  o clone através de um termi
 - [TypeScript](https://www.typescriptlang.org/) - Plataforma de desenvolvimento.
 - [Express](https://expressjs.com/) - Express é um framework web para Node.js que simplifica o processo de criação de APIs (Application Programming Interfaces).
 - [Prisma](https://www.prisma.io/) - Conjunto de ferramentas de desenvolvimento de banco de dados que oferece um ORM (Object-Relational Mapping) para Node.js e TypeScript.
+
 
