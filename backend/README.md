@@ -72,9 +72,11 @@ yarn add @prisma/client
 `JWT_SECRET=suasenha"`
 
 - Criar o migration ao executar o comando via terminal na pasta do projeto:
- ``
- yarn prisma  migrate dev
-``
+
+```
+yarn prisma  migrate dev 
+```
+ 
   
 
 ### ⚙️ Para executar a aplicação:
