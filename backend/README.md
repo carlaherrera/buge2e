@@ -83,7 +83,9 @@ Para execução da aplicação  na pasta do projeto através de um terminal de s
 ```
 yarn dev
 ```
+### 📚 Documentação Swagger
 
+Com a aplicação backend online acessar o swagger através: [Swagger BugE2E](http://localhost:3333/api-swagger/#/Product/getcategory_product)
 
 # 📌 Notas Gerais
  
