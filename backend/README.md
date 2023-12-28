@@ -1,7 +1,7 @@
 # 🚀 E2E Treinamentos - BUGE2E BACKEND
 
 
-## 👨‍💻O que você vai encontrar nesse repositório
+## 👨‍💻 O que você vai encontrar nesse repositório
 
 Neste repositório, você encontrará a aplicação **Backend BUGE2E**, usada nos desafios práticos em nossos treinamentos de Automação e Testes de software.
 
