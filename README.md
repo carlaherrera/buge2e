@@ -1,6 +1,6 @@
 #  🚀E2E Treinamentos - BUGE2E
 
-## 👨‍💻O que você vai encontrar nesse repositório?
+## 👨‍💻 O que você vai encontrar nesse repositório?
 
 Neste repositório, você encontrará a aplicação Backend e Frontend BUGE2E, usada nos desafios práticos em nossos treinamentos de Automação  e Testes de software.
 
@@ -29,8 +29,30 @@ Assim como as ferramentas/tecnologias e dependências necessárias para executar
 
 ## :hammer_and_wrench: Tecnologias Utilizadas
 - [Node.js](https://nodejs.org/en/) - Plataforma de desenvolvimento.
+
 - [TypeScript](https://www.typescriptlang.org/) - Plataforma de desenvolvimento.
+
+- [React](https://react.dev/) - Plataforma de desenvolvimento.
+
 - [Express](https://expressjs.com/) - Express é um framework web para Node.js que simplifica o processo de criação de APIs (Application Programming Interfaces).
+
 - [Prisma](https://www.prisma.io/) - Conjunto de ferramentas de desenvolvimento de banco de dados que oferece um ORM (Object-Relational Mapping) para Node.js e TypeScript.
+
+- [Axios](https://axios-http.com/ptbr/docs/intro) -Cliente HTTP baseado-em-promessas para o node.js e para o navegador
+  
+
+  # 📌 Notas Gerais
+ 
+**#BoraEstudar!**
+Conheça nossos Treinamentos [E2E Treinamentos](https://e2etreinamentos.com.br/)  
+
+⌨️ **Perfis:**
+ [LinkedIn](https://www.linkedin.com/company/e2e-treinamentos/) 
+ [Instagram](https://www.instagram.com/e2etreinamentos/) 
+ [Facebook](https://www.facebook.com/E2ETreinamento/?locale=pt_BR)
+  
+Feito com ❤️ por [E2E Treinamentos](https://e2etreinamentos.com.br/) 😊
+
+
 
 
